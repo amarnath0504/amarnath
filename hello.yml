@@ -1,0 +1,6 @@
+- name: PLAY1
+  hosts: all
+  tasks:
+    - name: Print PLAY1 Message
+      debug:
+        msg: "Hello from PLAY1"
