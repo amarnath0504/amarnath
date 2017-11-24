@@ -6,6 +6,11 @@
         name: httpd
         state: installed
         
+    - name: Enable httpd service
+      service:
+        name: httpd
+        state: started
+        
     - name: Start httpd service
       service:
         name: httpd
