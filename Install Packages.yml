@@ -15,6 +15,16 @@
       service:
         name: httpd
         state: started
+        
+    - name: Install httpd-devel service
+      package:
+        name: httpd-devel
+        state: installed
+        
+    - name: Install tomcat service
+      package:
+        name: tomcat
+        state: installed
       
   
     
