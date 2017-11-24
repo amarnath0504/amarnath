@@ -1,6 +1,35 @@
 - name: PLAY1
-  hosts: all
+- hosts: all
   tasks:
-    - name: Print PLAY1 Message
-      debug:
-        msg: "Hello from PLAY1"
+  user: ec2-user
+- hosts: tomcat
+  vars:
+  user: ec2-user
+  tasks:
+    - name: Install OpenJDK 7
+      yum: name=java-1.7.0-openjdk-devel state=latest
+      sudo: yes
+    - name: Create archives directory
+      file: path=/home/ec2-user/archives state=directory owner=ec2-user group=ec2-user
+    - name: Download Tomcat 8
+      get_url: url="http://apache.crihan.fr/dist/tomcat/tomcat-8/v8.0.0-RC1/bin/apache-tomcat-8.0.0-RC1.tar.gz" dest=/home/ec2-user/archives/apache-tomcat-8.0.0-RC1.tar.gz force=no
+    - name: Create tomcat directory
+      file: name=/opt/apache-tomcat owner=ec2-user group=ec2-user state=directory
+      sudo: yes
+    - name: Unzip tomcat
+      command: /bin/tar xzf /home/ec2-user/archives/apache-tomcat-8.0.0-RC1.tar.gz -C /opt/apache-tomcat creates=/opt/apache-tomcat/apache-tomcat-8.0.0-RC1
+    - name: Create Tomcat symlink
+      file: path=/opt/apache-tomcat/tomcat8 state=link src=/opt/apache-tomcat/apache-tomcat-8.0.0-RC1
+    - name: Install catalina.properties
+      template: src=/etc/ansible/playbooks/files/catalina.properties dest=/opt/apache-tomcat/tomcat8/conf/catalina.properties
+      notify:
+        - start tomcat
+    - name: Install Cocktail Webapp from DropBox
+      get_url: url="https://dl.dropbox.com/s/c0568sfgm285msn/cocktail.war" dest=/opt/apache-tomcat/tomcat8/webapps/cocktail.war force=no
+      notify:
+        - start tomcat
+  handlers:
+    - name: start tomcat
+      shell: /opt/apache-tomcat/tomcat8/bin/shutdown.sh && /opt/apache-tomcat/tomcat8/bin/startup.sh
+      
+...
