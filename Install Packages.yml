@@ -7,7 +7,7 @@
         name: httpd
         state: installed
     
-    - name: Install zip package
+    - name: enable httpd service
       package:
-        name: zip
-        state: installed
+        name: httpd
+        state: started
