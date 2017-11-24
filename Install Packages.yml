@@ -2,9 +2,9 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Install wget package
+    - name: Install httpd service
       package:
-        name: wget
+        name: httpd
         state: installed
     
     - name: Install zip package
