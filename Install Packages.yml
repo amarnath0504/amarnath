@@ -5,7 +5,7 @@
     - name: Install httpd service
       service:
         name: httpd
-        state: installed
+        state: got: installed
     
     - name: start httpd
       service:
