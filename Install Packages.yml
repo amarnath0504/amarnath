@@ -25,6 +25,11 @@
       package:
         name: tomcat
         state: installed
+        
+    - name: Start tomcat service
+      service:
+        name: tomcat
+        state: started
       
   
     
