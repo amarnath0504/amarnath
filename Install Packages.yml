@@ -1,13 +1,12 @@
 - name: Install Packages
   hosts: all
-  gather_facts: no
   tasks:
     - name: Install httpd service
-      service:
+      package:
         name: httpd
         state: installed
-    
-    - name: Start httpd
+        
+    - name: Start httpd service
       service:
         name: httpd
         state: started
