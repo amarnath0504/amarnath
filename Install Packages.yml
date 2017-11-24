@@ -5,16 +5,16 @@
     - name: Install httpd service
       service:
         name: httpd
-        state=installed
+        state: installed
     
     - name: start httpd
       service:
         name="{{ httpd_service }}"
-        state=started
+        state: started
       become: yes
   
     - name: restart httpd
       service:
         name="{{ httpd_service }}"
-        state=restarted
+        state: restarted
       become: yes
