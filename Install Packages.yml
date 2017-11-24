@@ -3,11 +3,18 @@
   gather_facts: no
   tasks:
     - name: Install httpd service
-      package:
+      service:
         name: httpd
         state: installed
     
-    - name: enable httpd service
-      package:
-        name: httpd
-        state: started
+   - name: start httpd
+     service:
+        name="{{ httpd_service }}"
+        state=started
+   become: yes
+  
+  - name: restart httpd
+    service:
+       name="{{ httpd_service }}"
+       state=restarted
+    become: yes
