@@ -7,14 +7,14 @@
         name: httpd
         state: installed
     
-   - name: start httpd
-     service:
+    - name: start httpd
+      service:
         name="{{ httpd_service }}"
         state=started
-   become: yes
+      become: yes
   
-  - name: restart httpd
-    service:
-       name="{{ httpd_service }}"
-       state=restarted
-    become: yes
+    - name: restart httpd
+      service:
+        name="{{ httpd_service }}"
+        state=restarted
+      become: yes
