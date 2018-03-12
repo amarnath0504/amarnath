@@ -29,12 +29,12 @@
         <repository>
             <id>deployment</id>
             <name>Internal Releases</name>
-            <url>http://10.160.0.3:8080/student/</url>
+            <url>http://35.200.213.118:8080/student/</url>
         </repository>
      <snapshotRepository>
             <id>deployment</id>
             <name>Internal Snapshot Releases</name>
-            <url>http://10.160.0.3:8080/student/</url>
+            <url>http://35.200.213.118:8080/student/</url>
         </snapshotRepository>
     </distributionManagement>
   <dependencies>
